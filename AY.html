@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Flights - SKYAYAN</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      border-radius: 0;
+    }
+    .flight-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .btn-book {
+      background-color: #337ab7;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .btn-book:hover {
+      background-color: #286090;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">SKYAYAN</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">SKYAYAN</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li class="active"><a href="itineary.html">Flights</a></li>
+        <li><a href="AY.html">booking</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center">Available Flights</h2>
+    <div id="flight-list"></div>
+  </div>
+
+  <script>
+    const flights = [
+      { airline: "IndiGo", from: "Delhi", to: "Mumbai", dep: "10:00 AM", arr: "12:15 PM", price: "₹3,999" },
+      { airline: "Air India", from: "Delhi", to: "Mumbai", dep: "11:30 AM", arr: "1:45 PM", price: "₹4,299" },
+      { airline: "Vistara", from: "Delhi", to: "Mumbai", dep: "01:00 PM", arr: "3:10 PM", price: "₹4,050" },
+      { airline: "SpiceJet", from: "Delhi", to: "Mumbai", dep: "2:30 PM", arr: "4:45 PM", price: "₹3,899" },
+      { airline: "GoAir", from: "Delhi", to: "Mumbai", dep: "4:00 PM", arr: "6:15 PM", price: "₹3,799" },
+      { airline: "Akasa Air", from: "Delhi", to: "Mumbai", dep: "5:30 PM", arr: "7:40 PM", price: "₹4,150" },
+      { airline: "Jet Airways", from: "Delhi", to: "Mumbai", dep: "6:45 PM", arr: "9:00 PM", price: "₹4,400" },
+      { airline: "Air Asia", from: "Delhi", to: "Mumbai", dep: "8:00 PM", arr: "10:10 PM", price: "₹3,999" },
+      { airline: "TruJet", from: "Delhi", to: "Mumbai", dep: "9:15 PM", arr: "11:30 PM", price: "₹3,499" },
+      { airline: "Alliance Air", from: "Delhi", to: "Mumbai", dep: "11:00 PM", arr: "1:15 AM", price: "₹3,950" }
+    ];
+
+    const container = document.getElementById("flight-list");
+
+    flights.forEach((flight, index) => {
+      const card = document.createElement("div");
+      card.className = "flight-card";
+      card.innerHTML = `
+        <h4><strong>${flight.airline}</strong></h4>
+        <p><strong>From:</strong> ${flight.from} | <strong>To:</strong> ${flight.to}</p>
+        <p><strong>Departure:</strong> ${flight.dep} | <strong>Arrival:</strong> ${flight.arr}</p>
+        <p><strong>Price:</strong> ${flight.price}</p>
+        <a href="booking.html" class="btn btn-book" onclick='selectFlight(${JSON.stringify(flight)})'>Book Now</a>
+      `;
+      container.appendChild(card);
+    });
+
+    function selectFlight(flight) {
+      localStorage.setItem("selectedFlight", JSON.stringify(flight));
+    }
+  </script>
+</body>
+</html>
